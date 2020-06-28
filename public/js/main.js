@@ -1,0 +1,55 @@
+
+
+function autoSize(textarea) {
+    textarea.style.height = "5px";
+    textarea.style.height = (textarea.scrollHeight)+"px";
+}
+
+function commentsCreate ()
+{
+    if (event.keyCode === 13) {
+        
+        document.getElementById("commentsCreateForm").submit();
+      }
+}
+
+function postCreate()
+{
+    document.getElementById("postsCreateForm").submit();
+}
+
+function deleteAction(formAction)
+{ 
+    document.getElementById("formDeleteAction").action = formAction ;
+    $('#deleteAction').modal('show');
+}
+
+$('.likeButtonClass').on('click', function(){
+    var button = this , form= this.form;
+    $(form).submit(function(e){
+        e.preventDefault();
+        var formdata = new FormData(this);
+                $.ajax({
+                    url: this.action,
+                    type: "POST",
+                    data: formdata,
+                    mimeTypes:"multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data){
+                    if (data.isLiked == "yes"){
+                          $(button).removeClass('btn-light').addClass('btn-link') ;
+                          $("input[name='isLiked']",form).val(data.isLiked);
+                          $(button).children('span').text(data.count);
+                    }else{
+                          $(button).removeClass('btn-link').addClass('btn-light') ;
+                          $("input[name='isLiked']",form).val(data.isLiked);
+                          $(button).children('span').text(data.count);
+                    }      
+                    }
+              });  
+           
+        });
+})
+  
