@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id ; 
 
-        $posts   = Post::where('privacy', 'public')->orWhere('user_id', $user_id)->get();
+        $posts   = Post::where('privacy', 'public')->orWhere('user_id', $user_id)->orderBy('created_at' , "DESC")->get();
        
         return view('home' , compact('posts'));
     }
