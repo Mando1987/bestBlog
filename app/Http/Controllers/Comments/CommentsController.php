@@ -16,11 +16,11 @@ class CommentsController extends Controller
     
     public function create()
     {
-       return __METHOD__;
+       
     }
     public function show()
     {
-       return __METHOD__;
+       
     }
     public function store(CommentRequest $request)
     {
