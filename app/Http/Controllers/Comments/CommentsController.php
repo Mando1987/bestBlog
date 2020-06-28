@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Comments;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 
@@ -25,8 +24,6 @@ class CommentsController extends Controller
 
        return redirect()->route('home')->with('status' , 'Created Success');
     }
-
-
     public function destroy($id)
     {
         Comment::where('id' , $id)->delete();

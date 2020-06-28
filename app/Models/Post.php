@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-
-    
+  
    public function comments()
    {
        return $this->hasMany("App\Models\Comment")->orderBy('created_at', 'DESC' );
