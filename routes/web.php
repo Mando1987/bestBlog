@@ -17,7 +17,14 @@ Auth::routes();
 
 //home 
 Route::redirect('/', '/index');
+Route::redirect('/home', '/index');
 Route::get('/index', 'HomeController@index')->name('home');
+//user 
+Route::post('/user/{id}', "Auth\UserController@update")->name('user.update');
+
+Route::get('/user/edit/{id}', "Auth\UserController@edit")->name('user.edit');
+
+
 
 //posts 
 Route::group(['namespace' => 'Posts' , 'prefix' => 'posts'] , function (){

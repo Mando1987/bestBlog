@@ -50,10 +50,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'      => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'  => ['required', 'string', 'min:8', 'confirmed'],
             'user_name' => ['required', 'string', 'unique:users' ],
+            'image'     => ['image', 'mimes:png,jpeg,jpg' ],
         ]);
     }
 
@@ -65,11 +66,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       
+        if (isset($data['image']))
+        {
+            $file     = $data['image'];
+            $ext      = $file->getClientOriginalExtension();
+            $fileName = 'image_' . time() . "_." . $ext ;
+            
+            $file->storeAs('public/images' , $fileName);
+
+        }else{
+            $fileName  = "noimage.png";
+        }
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
             'user_name' => $data['user_name'],
+            'image'     => $fileName,
         ]);
     }
 }

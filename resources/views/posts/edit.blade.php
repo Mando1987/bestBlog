@@ -12,7 +12,7 @@
                         <form id="postsCreateForm" action="{{ route('posts.update' , $posts[0]->id ) }}" method="POST">
                             <div class="row no-gutters">
                                 <div class="col-1">
-                                    <img src="{{ url('images/user.jpg') }}" class="card-img">
+                                    <img src="{{ asset('storage/images/' . $posts[0]->user->image) }}" class="card-img">
                                 </div>
                                 <div class="form-group col-11 postsCreateInput">
                                     <textarea name="post_content" class="form-control"

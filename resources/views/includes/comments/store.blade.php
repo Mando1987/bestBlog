@@ -2,7 +2,7 @@
 <div class="card mb-3 commentsCreate">
     <div class="row no-gutters">
         <div class="col-1">
-            <img src="{{ url('images/user.jpg') }}" class="card-img" >
+            <img src="{{ asset('storage/images/' . auth()->user()->image) }}" class="card-img" >
         </div>
         <div class="col-11">
             <form id="commentsCreateForm" action="{{ route('comments.store') }}" method="POST">
