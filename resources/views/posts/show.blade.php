@@ -26,30 +26,9 @@ Post Page
                         </p>
                         {{-- post Content --}}
                         <hr>
-                        {{-- post Buttons --}}
-                        <div class="row " style="margin-top: -15px ;margin-bottom:-12px">
-                            <div class="col">
-                                  <form action="" id="likeForm">
-                                    <button type="button" class="btn btn-light">
-                                        <i class="far fa-thumbs-up"></i> Like
-                                    </button>
-                                  </form>
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-light" data-toggle="collapse"
-                                    data-target="#collapseOne{{ $loop->iteration }}" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    <i class="far fa-comment-alt"></i> Comments
-                                </button>
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-primary active" aria-pressed="true">
-                                    <i class="fas fa-share"></i> Share
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
-                        {{-- post Buttons --}}
+                        {{-- post button --}}
+                        @include('includes.posts.buttons' , $post)
+                        {{-- post button --}}
                         {{-- post Comments --}}
                         <div class="mt-3">
                             @include('includes.comments.index')

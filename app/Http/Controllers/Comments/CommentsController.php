@@ -33,6 +33,8 @@ class CommentsController extends Controller
 
        return redirect()->route('home')->with('status' , 'Created Success');
     }
+
+    
     public function destroy($id)
     {
         Comment::where('id' , $id)->delete();
