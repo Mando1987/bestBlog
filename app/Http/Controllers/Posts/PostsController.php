@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Posts;
 
-use App\Models\Post;
-use App\Models\Comment;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
+use App\Models\Comment;
 use App\Models\Like;
 
 class PostsController extends Controller
@@ -30,9 +28,15 @@ class PostsController extends Controller
     {
 
         $posts = Post::where('user_id', $id)->get();
-       
-        return view('posts.show' , compact('posts'));
+        if(!empty($posts)):
+            return view('posts.show' , compact('posts'));
+        else:
+            // return redirect()->back()->with(['status' => 'No Posts found for this user']);
+            return redirect()->route('home')->with('status' , 'Created Success');
+        endif;
+        
     }
+
 
 
     public function create(){
@@ -56,19 +60,20 @@ class PostsController extends Controller
     public function edit($id)
     {
         $posts  = Post::where('user_id' , auth()->user()->id)->where('id' , $id)->get();
-
-        return view('posts.edit' , compact('posts'));
+        if(!empty($posts))
+           return view('posts.edit' , compact('posts'));
     }
 
     public function update(PostRequest $request , $id){
 
         $post = Post::find($id);
-        $post->post_content = $request->post_content;
-        $post->privacy = $request->privacy;
-        $post->user_id = auth()->user()->id;
-        $post->save();
+        if(!empty($post))
+            $post->post_content = $request->post_content;
+            $post->privacy = $request->privacy;
+            $post->user_id = auth()->user()->id;
+            $post->save();
 
-        return redirect()->route('home')->with('status' , 'Updated Success');
+            return redirect()->route('home')->with('status' , 'Updated Success');
       
     }
 
