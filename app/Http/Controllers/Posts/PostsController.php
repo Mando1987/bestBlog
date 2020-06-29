@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Posts;
 
-use App\Http\Requests\PostRequest;
-use App\Http\Controllers\Controller;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Comment;
-use App\Models\Like;
+use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -27,11 +28,19 @@ class PostsController extends Controller
     public function show($id)
     {
 
-        $posts = Post::where('user_id', $id)->get();
+        $posts = Post::select(
+            'id' , 'user_id' ,
+             DB::raw('CONCAT(ROUND(HOUR(TIMEDIFF( NOW(),created_at))/24 , 0), "d : " , ROUND(MINUTE(TIMEDIFF( NOW(),created_at)) , 0) , "m")  as date'  ),
+
+              'post_content' , 'privacy' 
+            
+            )->where('user_id', $id)->orderBy('created_at' , "DESC")->get();
+
         if(!empty($posts)):
+
             return view('posts.show' , compact('posts'));
         else:
-            // return redirect()->back()->with(['status' => 'No Posts found for this user']);
+            
             return redirect()->route('home')->with('status' , 'Created Success');
         endif;
         
