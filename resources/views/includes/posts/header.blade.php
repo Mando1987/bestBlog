@@ -7,7 +7,7 @@
         <div class="col-9">
 
         <a href="{{route('posts.show' , $post->user->id)}}" class="card-subtitle card-link">{{$post->user->name}}</a>
-            <h6 class="card-subtitle  text-muted">1h</h6>
+        <h6 class="card-subtitle  text-muted">{{$post->date}}</h6>
         </div>
         
         <div class="col-1">

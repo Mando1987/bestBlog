@@ -21,11 +21,13 @@
     @include('includes.navbar')
 
     <div class="container" id="app">
+
         @if(session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
             </div>
         @endif
+        
         @hasSection('content')
 
             @yield('content')
