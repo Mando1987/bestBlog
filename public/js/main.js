@@ -42,6 +42,14 @@ $(".likeButtonClass").on("click", function () {
                 $("input[name='isLiked']", form).val(data.isLiked);
                 $(button).children("span").text(data.count);
             }
+        }, error : function(reject){
+
+            var response = $.parseJSON(reject.responseText) ;
+            
+            $.each (response.errors , function (key , val){
+
+                $('#' + key + '_error').text(val[0]);
+            })
         },
     });
 });
