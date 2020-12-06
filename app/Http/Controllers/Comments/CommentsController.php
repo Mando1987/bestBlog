@@ -12,22 +12,30 @@ class CommentsController extends Controller
    {
        $this->middleware('auth');
    }
-    
+
     public function store(CommentRequest $request)
     {
-       
+
        $comment = new Comment();
-       $comment->comment_content = $request->comment_content;
-       $comment->user_id = auth()->user()->id;
-       $comment->post_id = $request->post_id;
-       $comment->save();
+    //    $comment->comment_content = $request->comment_content;
+    //    $comment->user_id = auth()->user()->id;
+    //    $comment->post_id = $request->post_id;
+    //    $comment->save();
+
 
        return redirect()->route('home')->with('status' , 'Created Success');
     }
     public function destroy($id)
     {
-        Comment::where('id' , $id)->delete();
 
+        Comment::where('id' , $id)->delete();
         return redirect()->route('home')->with('status' , 'Deleteted Success');
+
     }
+
+
+
+
+
+
 }

@@ -5,7 +5,11 @@ Post Page
 
 @section('content')
 
+
 <div class="container mt-4">
+    @can('edit-settings')
+       <h1>HELLOW</h1>
+    @endcan
    {{-- Create new post --}}
     {{-- @include('includes.posts.create') --}}
     

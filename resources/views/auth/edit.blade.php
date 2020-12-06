@@ -76,8 +76,14 @@
                             <label for="user-image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user-image" type="file" class="form-control-file" name="image" value="{{asset('storage/images/'.$user[0]->image)}}">
-                                <input type="hidden" name="old_image" value="{{$user[0]->image}}">
+                                <input id="user-image" type="file" class="form-control-file" name="image" value="{{asset($ph)}}">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                               @enderror
+                                <input type="hidden" name="old_image" value="{{$ph}}">
+                                {{-- <input type="hidden" name="old_image" value="{{$user[0]->image}}"> --}}
                             </div>
                             <div class="col-md-2">
                                 <img src="{{asset('storage/images/'.$user[0]->image)}}" alt="" width="60" height="60" style="border-radius: 50%">

@@ -42,7 +42,9 @@
                                             <div class="dropdown-divider"></div>
                                             <button
                                                 onclick="deleteAction('{{ route('comments.destroy', $comment->id) }}')"
-                                                class="dropdown-item">delete</button>
+                                                class="dropdown-item">
+                                               delete
+                                            </button>
 
                                         </div>
                                     </li>

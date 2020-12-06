@@ -89,13 +89,11 @@ class PostsController extends Controller
     public function destroy($id)
     {
        //remove exists post for authentecated user;
-        $post = Post::where('user_id' , auth()->user()->id)->where('id' , $id)->delete();
-        if ($post){
-            //remove comments for this post
-            $comments = Comment::where('post_id', $id)->delete();
-            //remove likes for this post
-            $likes    = Like::where('post_id', $id)->delete();
-        } 
+        $post = Post::where('user_id' , auth()->user()->id)->where('id' , $id)->first();
+
+        
+        $post->delete();
+        Comment::where('post_id', $post->id)->delete();
         return redirect()->route('home')->with('status' , 'Deleteted Success');
     }
     
