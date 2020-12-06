@@ -19,7 +19,7 @@ function deleteAction(formAction) {
 }
 
 $(".likeButtonClass").on("click", function () {
-    var button = this,
+    var button     = this,
         divContent = $(this).parent(),
         form       = this.form,
         formdata   = new FormData(form);
@@ -45,7 +45,7 @@ $(".likeButtonClass").on("click", function () {
         }, error : function(reject){
 
             var response = $.parseJSON(reject.responseText) ;
-            
+
             $.each (response.errors , function (key , val){
 
                 $('#' + key + '_error').text(val[0]);
